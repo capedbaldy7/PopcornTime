@@ -1,0 +1,59 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+body {
+    font-size: 13px;
+    line-height: 1.8;
+    font-weight: 300;
+    font-family: 'Poppins', sans-serif;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.jumbotron {
+    background-color: transparent;
+    font-family: 'Poppins', sans-serif;
+}
+
+.signin-content {
+    padding-top: 67px;
+    padding-bottom: 87px;
+    display: -webkit-flex;
+    background-color: white;
+}
+
+.signin-form h2 {
+    font-size: 36px;
+    font-weight: 700;
+    font-family: "Poppins";
+}
+
+.signin-form {
+    margin-right: 90px;
+    margin-left: 80px;
+    width: 50%;
+    overflow: hidden;
+}
+
+.signin-image {
+    margin-left: 110px;
+    margin-right: 20px;
+    margin-top: 10px;
+    width: 50%;
+    overflow: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+figure {
+    margin-bottom: 50px;
+    text-align: center;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

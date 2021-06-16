@@ -14,6 +14,8 @@ import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
     imports: [
@@ -23,7 +25,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         appRoutingModule,
         BrowserAnimationsModule,
         MatSlideToggleModule,
-        MatIconModule
+        MatIconModule,
+        MatCardModule,
+        MatButtonModule
     ],
     declarations: [
         AppComponent,

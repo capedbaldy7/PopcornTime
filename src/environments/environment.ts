@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:4000'
+  apiUrl: 'https://demo.credy.in/api/v1/usermodule/login/'
 };
 
 /*

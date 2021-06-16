@@ -1,1 +1,39 @@
-<h1>Home Page</h1>
+<h1>Movies</h1>
+<button mat-raised-button color="primary" (click)="onClickHandle()" class="btn btn-dark">Fetch Movies</button>
+
+<hr />
+
+<!--
+<div *ngFor="let movie of allMovies;" class="card">
+    <mat-card class="example-card">
+        <mat-card-header>
+            <mat-card-title>{{movie.title}}</mat-card-title>
+            <mat-card-subtitle>{{movie.genres}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        <mat-card-content>
+            {{movie.description}}
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary">Learn More</button>
+        </mat-card-actions>
+    </mat-card>
+</div>
+-->
+<div class="row">
+    <div *ngFor="let movie of allMovies;" class="card" style="width: 28rem;">
+        <div class="card-header bg-transparent">
+            <h5 class="card-title">
+                {{movie.title}}
+            </h5>
+            <span class="badge badge-secondary">{{movie.genres}}</span>
+        </div>
+        <img mat-card-image src="https://ui-avatars.com/api/?name={{movie.title}}" class="card-img-top">
+        <div class="card-body">
+            <p class="card-text">
+                {{movie.description}}
+            </p>
+            <a href="#" class="btn btn-primary">Learn More</a>
+        </div>
+    </div>
+</div>

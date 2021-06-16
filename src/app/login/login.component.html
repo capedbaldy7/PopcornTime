@@ -1,10 +1,5 @@
 <div *ngIf="error" class="alert alert-danger">{{error}}</div>
 <div *ngIf="success" class="alert alert-success">{{success}}</div>
-<!--
-<div class="center">
-    <a href="/"><img src="assets/images/logo.png" alt="Popcorn Time"></a>
-</div>
--->
 
 
 <div class="container-fluid">
@@ -44,39 +39,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-<!---This is login form
-<div class="signin-content">
-    <div class="signin-image">
-        <figure><img src="assets/images/signin-image.jpg" alt="sing up image"></figure>
-    </div>
-    <div class="signin-form">
-        <h2>Login</h2>
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
-                <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                    <div *ngIf="f.username.errors.required">Username is required</div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                    <div *ngIf="f.password.errors.required">Password is required</div>
-                </div>
-            </div>
-            <div class="form-group">
-                <button [disabled]="loading" class="btn btn-primary">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                    Login
-                </button>
-            </div>
-        </form>
-    </div>
-</div>
--->

@@ -41,8 +41,11 @@
         <h3><span class="badge bg-info text-dark">{{selectedMovie && selectedMovie.genres ? selectedMovie.genres : 'General'}}</span></h3>
     </div>
     <img mat-card-image src="https://ui-avatars.com/api/?name={{selectedMovie && selectedMovie.title}}" class="card-img-top" style="margin-bottom: 20px;">
-    <p class="modal-text" style="font-size: 20px;">
-        {{selectedMovie && selectedMovie.description}}
-    </p>
-    <button class="btn btn-danger" (click)="closeModal('custom-modal-1');">Close</button>
+    <div class="card-body">
+        <p class="modal-text">
+            {{selectedMovie && selectedMovie.description}}
+        </p>
+        <button class="btn btn-danger" (click)="closeModal('custom-modal-1');">Close</button>
+    </div>
+
 </jw-modal>

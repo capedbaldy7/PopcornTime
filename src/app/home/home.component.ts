@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
   movies: any;
   allMovies: MovieTypes[];
   pageNumber: number = 1;
+  selectedMovie: MovieTypes;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -31,16 +32,9 @@ export class HomeComponent implements OnInit {
       .subscribe((res) => {
         this.movies = res;
         this.allMovies = this.movies.results;
+        console.log('Fetched');
       });
   }
-  //Model
-  openModal(id: string) {
-    this.modalService.open(id);
-}
-
-closeModal(id: string) {
-    this.modalService.close(id);
-}
 
   public onFetchMoviesHandle() {
     const token = JSON.parse(localStorage.getItem('token'));
@@ -49,6 +43,19 @@ closeModal(id: string) {
       this.movies = res;
       this.allMovies = this.movies.results;
     });
+  }
+
+  //Modal
+  openModal(id: string, movieUUID: string) {
+    this.modalService.open(id);
+    const filteredMovie = this.allMovies.find(
+      (movie) => movie.uuid === movieUUID
+    );
+    this.selectedMovie = filteredMovie;
+  }
+
+  closeModal(id: string) {
+    this.modalService.close(id);
   }
 
   public onFetchNextMovies() {
@@ -108,4 +115,3 @@ closeModal(id: string) {
     }
   }
 }
-

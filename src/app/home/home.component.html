@@ -1,38 +1,11 @@
-<!--
-<h1>Movies</h1>
-<button mat-raised-button color="primary" (click)="onClickHandle()" class="btn btn-dark">Fetch Movies</button>
-<hr />
-
-<div class="row">
-    <div *ngFor="let movie of allMovies | paginate: { itemsPerPage: 10, currentPage: page, totalItems:totalLength }" class="card" style="width: 28rem;">
-        <div class="card-header bg-transparent">
-            <h5 class="card-title">
-                {{movie.title}}
-            </h5>
-            <span class="badge badge-secondary">{{movie.genres}}</span>
-        </div>
-        <img mat-card-image src="https://ui-avatars.com/api/?name={{movie.title}}" class="card-img-top">
-        <div class="card-body">
-            <p class="card-text">
-                {{movie.description}}
-            </p>
-            <a href="#" class="btn btn-primary">Learn More</a>
-        </div>
-    </div>
-
-    <pagination-controls class="text-center" previousLabel="Prev" nextLabel="Next" responsive="true" (pageChange)="page = $event"></pagination-controls>
-
-</div>
--->
-<h1>Movies</h1>
+<h1 style="font-weight: 700;">Movies</h1>
 <div style="display: flex; justify-content: space-between;">
-    <button mat-raised-button color="primary" (click)="onFetchMoviesHandle()" class="btn btn-dark">Fetch Movies</button>
+    <button mat-raised-button color="primary" (click)="onFetchMoviesHandle()" class="btn btn-secondary">Fetch Movies</button>
     <div style="display: flex; justify-content: space-between;">
         <button mat-raised-button color="primary" (click)="onFetchPrevMovies()" class="btn btn-secondary ml-2" [disabled]="prevBtnDisabled()">Previous Page
         </button>
 
-        <p style="display: flex; align-items: center;" class="badge badge-dark ml-2">{{pageNumber}}
-        </p>
+        <h4><span style="display: flex; align-items: center;" class="badge bg-light text-dark ml-2">{{pageNumber}}</span></h4>
 
         <button mat-raised-button color="primary" (click)="onFetchNextMovies()" class="btn btn-secondary ml-2" [disabled]="nextBtnDisabled()">Next
             Page</button>
@@ -44,34 +17,32 @@
 <div class="row" style="display: flex; justify-content: space-evenly;">
     <div *ngFor="let movie of allMovies;" class="card" style="width: 20rem;">
         <div class="card-header bg-transparent">
-            <h5 class="card-title">
+            <h5 class="card-title" style="font-weight: 500; font-size: x-large;">
                 {{movie.title}}
             </h5>
-            <span class="badge badge-secondary">{{movie.genres}}</span>
+            <span class="badge bg-info text-dark">{{movie.genres ? movie.genres : 'General'}}</span>
         </div>
         <img mat-card-image src="https://ui-avatars.com/api/?name={{movie.title}}" class="card-img-top">
         <div class="card-body">
             <p class="card-text">
                 {{movie.description}}
             </p>
-            <button class="btn btn-light" (click)="openModal('custom-modal-1')">View More</button>
+            <button class="btn btn-outline-primary" (click)="openModal('custom-modal-1', movie.uuid)">View More</button>
         </div>
-        <!--changes start-->
-        <jw-modal id="custom-modal-1">
-            <div class="card-header bg-transparent">
-                <h5 class="card-title">
-                    {{movie.title}}
-                </h5>
-                <span class="badge badge-secondary">{{movie.genres}}</span>
-            </div>
-            <img mat-card-image src="https://ui-avatars.com/api/?name={{movie.title}}" class="card-img-top">
-            <div class="card-body">
-                <p class="card-text">
-                    {{movie.description}}
-                </p>
-                <button class="btn btn-light" (click)="closeModal( 'custom-modal-1');">Close</button>
-            </div>
-        </jw-modal>
-        <!--changes end-->
     </div>
 </div>
+
+<!-- Modal start-->
+<jw-modal id="custom-modal-1">
+    <div class="card-header bg-transparent">
+        <h1 class="card-title">
+            {{ selectedMovie && selectedMovie.title}}
+        </h1>
+        <h3><span class="badge bg-info text-dark">{{selectedMovie && selectedMovie.genres ? selectedMovie.genres : 'General'}}</span></h3>
+    </div>
+    <img mat-card-image src="https://ui-avatars.com/api/?name={{selectedMovie && selectedMovie.title}}" class="card-img-top" style="margin-bottom: 20px;">
+    <p class="modal-text" style="font-size: 20px;">
+        {{selectedMovie && selectedMovie.description}}
+    </p>
+    <button class="btn btn-danger" (click)="closeModal('custom-modal-1');">Close</button>
+</jw-modal>

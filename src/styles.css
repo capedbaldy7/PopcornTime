@@ -55,6 +55,10 @@ body {
     -webkit-box-orient: vertical;
 }
 
+.modal-text {
+    font-family: 'Poppins', sans-serif;
+}
+
 .card {
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -79,7 +83,7 @@ body {
 
 body {
     margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 
 

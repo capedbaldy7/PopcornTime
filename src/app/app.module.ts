@@ -16,6 +16,9 @@ import { RegisterComponent } from './register';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { JwPaginationModule } from 'jw-angular-pagination';
+import { ModalModule } from './_modal';
 
 @NgModule({
     imports: [
@@ -27,7 +30,10 @@ import {MatButtonModule} from '@angular/material/button';
         MatSlideToggleModule,
         MatIconModule,
         MatCardModule,
-        MatButtonModule
+        MatButtonModule,
+        NgxPaginationModule,
+        JwPaginationModule,
+        ModalModule
     ],
     declarations: [
         AppComponent,

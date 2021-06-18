@@ -1,48 +1,33 @@
-<h1 style="font-weight: 700;">Movies</h1>
-<div style="display: flex; justify-content: space-between;">
-    <button mat-raised-button color="primary" (click)="onFetchMoviesHandle()" class="btn btn-secondary">Fetch Movies</button>
+<div class="top-bar">
+    <h1 style="font-weight: 700;">Movies</h1>
+
     <!--search component-->
-    <input type="text" [formControl]="searchControl" />
+    <div class="form-group w-50">
+        <input class="form-control" type="text" [formControl]="searchControl" placeholder="Search Movies" />
+    </div>
+
 
     <div>
         <ng-container *ngIf="(areMinimumCharactersTyped$ | async); else lessThanMinimumCharactersTyped">
             <ng-container *ngIf="(areNoResultsFound$ | async); else results">
-                No Results found.
             </ng-container>
-            <ng-template #results>
-                Got results
-                <ul>
-                    <li *ngFor="let result of searchResults$ | async">
-                        {{ result | json }}
-                    </li>
-                </ul>
+            <ng-template>
             </ng-template>
         </ng-container>
         <ng-template #lessThanMinimumCharactersTyped>
-            Enter minimum 3 characters to start searching.
         </ng-template>
     </div>
     <!--End search component-->
-
-    <div style="display: flex; justify-content: space-between;">
-        <button mat-raised-button color="primary" (click)="onFetchPrevMovies()" class="btn btn-secondary ml-2" [disabled]="prevBtnDisabled()">Previous Page
-        </button>
-
-        <h4><span style="display: flex; align-items: center;" class="badge bg-light text-dark ml-2">{{pageNumber}}</span></h4>
-
-        <button mat-raised-button color="primary" (click)="onFetchNextMovies()" class="btn btn-secondary ml-2" [disabled]="nextBtnDisabled()">Next
-            Page</button>
-    </div>
 </div>
 
 <hr />
 
-<!-- Movie Card 
-<div class="row" style="display: flex; justify-content: space-evenly;">
-    <div *ngFor="let movie of allMovies;" class="card" style="width: 20rem;">
+
+<div class="row" style="display: flex; flex-wrap: wrap;">
+    <div #results *ngFor="let movie of allMovies;" class="card" style="width: 20rem;">
         <div class="card-header bg-transparent">
             <h5 class="card-title" style="font-weight: 500; font-size: x-large;">
-                {{movie.title}}
+                {{ movie.title }}
             </h5>
             <span class="badge bg-info text-dark">{{movie.genres ? movie.genres : 'General'}}</span>
         </div>
@@ -55,23 +40,41 @@
         </div>
     </div>
 </div>
--->
-<!-- Movie Modal
+
+<!-- Loading starts here -->
+<div *ngIf="loading">Loading...</div>
+<div *ngIf="errorMessage" class="alert alert-warning">
+    <strong>Press refresh to fetch movies!</strong>
+</div>
+<!-- Loading ends here -->
+
+<!-- Modal start-->
 <jw-modal id="custom-modal-1">
     <div class="card-header bg-transparent">
-        <h1 class="card-title">
+        <h5 class="card-title">
             {{ selectedMovie && selectedMovie.title}}
-        </h1>
-        <h3><span class="badge bg-info text-dark">{{selectedMovie && selectedMovie.genres ? selectedMovie.genres : 'General'}}</span></h3>
+        </h5>
+        <span class="badge bg-info text-dark">{{selectedMovie && selectedMovie.genres ? selectedMovie.genres : 'General'}}</span>
     </div>
-    <img mat-card-image src="https://ui-avatars.com/api/?name={{selectedMovie && selectedMovie.title}}" class="card-img-top" style="margin-bottom: 20px;">
+    <img mat-card-image src="https://ui-avatars.com/api/?name={{selectedMovie && selectedMovie.title}}" class="card-img-top">
     <div class="card-body">
         <p class="modal-text">
             {{selectedMovie && selectedMovie.description}}
         </p>
         <button class="btn btn-danger" (click)="closeModal('custom-modal-1');">Close</button>
     </div>
-
 </jw-modal>
+<!--Modal end -->
+<div class="nav-bar">
+    <nav class="center" aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#" (click)="onFetchPrevMovies()" (disabled)="prevBtnDisabled()">{{prevPageLoading ? 'Loading...' : 'Previous Page'}}</a></li>
+            <li class="page-item"><a class="page-link" href="#">{{pageNumber}}</a></li>
+            <li class="page-item"><a class="page-link" href="#" (click)="onFetchNextMovies()" (disabled)="nextBtnDisabled()">{{nextPageLoading ? 'Loading...' : 'Next Page'}}</a></li>
+        </ul>
+    </nav>
+</div>
 
--->
+<!--Movie Fetch buttton-->
+<a id="refresh" value="Refresh" (click)="onFetchMoviesHandle()"> <svg class="refreshicon" version="1.1" id="Capa_1" x="0px" y="0px" width="25px" height="25px" viewBox="0 0 322.447 322.447" style="enable-background:new 0 0 322.447 322.447;" xml:space="preserve">
+    <path d="M321.832,230.327c-2.133-6.565-9.184-10.154-15.75-8.025l-16.254,5.281C299.785,206.991,305,184.347,305,161.224 c0-84.089-68.41-152.5-152.5-152.5C68.411,8.724,0,77.135,0,161.224s68.411,152.5,152.5,152.5c6.903,0,12.5-5.597,12.5-12.5 c0-6.902-5.597-12.5-12.5-12.5c-70.304,0-127.5-57.195-127.5-127.5c0-70.304,57.196-127.5,127.5-127.5 c70.305,0,127.5,57.196,127.5,127.5c0,19.372-4.371,38.337-12.723,55.568l-5.553-17.096c-2.133-6.564-9.186-10.156-15.75-8.025 c-6.566,2.134-10.16,9.186-8.027,15.751l14.74,45.368c1.715,5.283,6.615,8.642,11.885,8.642c1.279,0,2.582-0.198,3.865-0.614 l45.369-14.738C320.371,243.946,323.965,236.895,321.832,230.327z" /> </svg>    </a>

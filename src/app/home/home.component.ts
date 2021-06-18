@@ -54,17 +54,17 @@ export class HomeComponent implements OnInit {
     this.searchControl = this.formBuilder.control('');
 
     this.areMinimumCharactersTyped$ = this.searchControl.valueChanges.pipe(
-      map((searchString) => searchString.length >= 3)
+      map((searchString) => searchString.length >= 1)
     );
 
-    // this.ifMinimumCharactersNotTyped$ = this.searchControl.valueChanges.pipe(
+    //  this.ifMinimumCharactersNotTyped$ = this.searchControl.valueChanges.pipe(
     //   map((searchString) => searchString.length < 3)
-    // );
+    //  );
 
     const searchString$ = merge(
       defer(() => of(this.searchControl.value)),
       this.searchControl.valueChanges
-    ).pipe(debounceTime(250), distinctUntilChanged());
+    ).pipe(debounceTime(1000), distinctUntilChanged());
 
     this.searchResults$ = searchString$.pipe(
       switchMap((searchString: string) => this.search(searchString)),
@@ -72,7 +72,7 @@ export class HomeComponent implements OnInit {
     );
 
     this.areNoResultsFound$ = this.searchResults$.pipe(
-      map((results) => results.length === 0)
+      map((results) => results.length < 3)
     );
     //end search
 
@@ -111,10 +111,6 @@ export class HomeComponent implements OnInit {
       (error) => {
         console.error('Request failed with error');
         this.errorMessage = error;
-        this.loading = false;
-      },
-      () => {
-        console.error('Request completed!');
         this.loading = false;
       }
     );
@@ -205,7 +201,10 @@ export class HomeComponent implements OnInit {
   }
 
   public search(searchString: string): Observable<MovieTypes[]> {
-    // if (searchString.length >= 3) {
+    if (searchString.length < 3) {
+      console.log("true")
+      this.onFetchMoviesHandle();
+    } 
     return of(this.allMovies).pipe(
       map((movies) =>
         movies.filter(({ title }) =>
@@ -213,13 +212,13 @@ export class HomeComponent implements OnInit {
         )
       ),
       tap((movie) => {
-        this.allMovies = movie;
+        this.allMovies = this.filterMovie(movie);
       })
     );
-    // }
-
-    // if (searchString.length < 3) {
-    //   this.onFetchMoviesHandle();
-    // }
+  }
+  public filterMovie(movie: MovieTypes[]) {
+    return this.allMovies.filter(
+      (movieItem) => movieItem.title === movie[0].title
+    );
   }
 }

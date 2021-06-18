@@ -8,6 +8,41 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
+
+/*Reload*/
+
+#refresh {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #1059FF;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.1);
+    padding: 13px 0 0 13px
+}
+
+.refreshicon {
+    fill: #d3d3d3;
+    transform: rotate(0deg);
+    transition: fill .25s ease, transform .25s ease
+}
+
+.refreshicon:hover {
+    cursor: pointer;
+    fill: #ffffff;
+    transform: rotate(180deg)
+}
+
+
+/*End Reload*/
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+}
+
 .center {
     display: flex;
     justify-content: center;
@@ -84,6 +119,17 @@ body {
 body {
     margin: 0;
     font-family: "Poppins", sans-serif;
+    background-color: white;
+    color: black;
+}
+
+.nav-bar {
+    margin-top: 60px;
+}
+
+.form-group {
+    margin-bottom: 8px;
+    margin-top: 8px;
 }
 
 

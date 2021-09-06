@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Sample request:
 
-  UsernName: testuser 
+  UsernName: testuser <br>
   Password: ruDWLeHr9K7ErsUS
 
 
